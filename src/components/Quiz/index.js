@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
+import React, { useState, useEffect } from "react";
+import PropTypes from "prop-types";
 import {
   Container,
   Segment,
@@ -10,11 +10,11 @@ import {
   Message,
   Menu,
   Header,
-} from 'semantic-ui-react';
-import he from 'he';
+} from "semantic-ui-react";
+import he from "he";
 
-import Countdown from '../Countdown';
-import { getLetter } from '../../utils';
+import Countdown from "../Countdown";
+import { getLetter } from "../../utils";
 
 const Quiz = ({ data, countdownTime, endQuiz }) => {
   const [questionIndex, setQuestionIndex] = useState(0);
@@ -24,14 +24,14 @@ const Quiz = ({ data, countdownTime, endQuiz }) => {
   const [timeTaken, setTimeTaken] = useState(null);
 
   useEffect(() => {
-    if (questionIndex > 0) window.scrollTo({ top: 0, behavior: 'smooth' });
+    if (questionIndex > 0) window.scrollTo({ top: 0, behavior: "smooth" });
   }, [questionIndex]);
 
   const handleItemClick = (e, { name }) => {
     setUserSlectedAns(name);
   };
 
-  const handleNext = () => {
+  function handleNext() {
     let point = 0;
     if (userSlectedAns === he.decode(data[questionIndex].correct_answer)) {
       point = 1;
@@ -58,9 +58,9 @@ const Quiz = ({ data, countdownTime, endQuiz }) => {
     setQuestionIndex(questionIndex + 1);
     setUserSlectedAns(null);
     setQuestionsAndAnswers(qna);
-  };
+  }
 
-  const timeOver = timeTaken => {
+  const timeOver = (timeTaken) => {
     return endQuiz({
       totalQuestions: data.length,
       correctAnswers,
@@ -111,7 +111,7 @@ const Quiz = ({ data, countdownTime, endQuiz }) => {
                           active={userSlectedAns === decodedOption}
                           onClick={handleItemClick}
                         >
-                          <b style={{ marginRight: '8px' }}>{letter}</b>
+                          <b style={{ marginRight: "8px" }}>{letter}</b>
                           {decodedOption}
                         </Menu.Item>
                       );
